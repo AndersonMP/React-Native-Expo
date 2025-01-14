@@ -4,8 +4,26 @@ const PATH = 'laptops';
 const URL = `http://${IP}:${PORT}/${PATH}`;
 
 export const getAllLaptops = async () => {
-    console.log(URL);
     const response = await fetch(URL);
     const result = await response.json();
+    return result;
+}
+
+export const saveLaptopRest = async ({ marca, procesador, ram, disco }, fnShowMessage) => {
+    const config = {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            marca: marca,
+            procesador: procesador,
+            memoria: ram,
+            disco: disco
+        })
+    };
+    const response = await fetch(URL, config);
+    const result = await response.json();
+    fnShowMessage();
     return result;
 }
