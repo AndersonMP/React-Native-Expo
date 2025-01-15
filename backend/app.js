@@ -19,25 +19,32 @@ let laptops = [
         disco: "256 GB SSD"
     },
     {
-        id: 3,
+        id: 2,
         marca: "Asus",
         procesador: "Intel Core i9",
         memoria: "32 GB",
         disco: "1 TB"
     },
     {
-        id: 4,
+        id: 3,
         marca: "Acer",
         procesador: "AMD Ryzen 5",
         memoria: "12 GB",
         disco: "512 GB SSD"
     },
     {
-        id: 5,
+        id: 4,
         marca: "MSI",
         procesador: "Intel Core i7",
         memoria: "16 GB",
         disco: "2 TB"
+    },
+    {
+        id: 5,
+        marca: "Lenovo",
+        procesador: "AMD Ryzen 9",
+        memoria: "32 GB",
+        disco: "2 TB SSD"
     }
 ];
 
@@ -126,7 +133,9 @@ app.delete("/laptops/:idParam", (req, res) => {
         // 2. El segundo argumento (1) especifica que se eliminará un solo elemento
         // 3. Modifica el array original eliminando el elemento en la posición dada
         laptops.splice(index, 1);
-        res.status(204).send();
+        res.status(200).json({
+            message: `Laptop eliminada correctamente.`
+        });
     } else {
         // Status visible desde POSTMAN
         // Caso contrario respondemos con status 404 Not Found y un mensaje

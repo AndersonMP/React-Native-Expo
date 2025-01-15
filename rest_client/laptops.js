@@ -49,3 +49,18 @@ export const updateLaptopRest = async ({ id, marca, procesador, ram, disco }, fn
 
     return result;
 }
+
+
+export const deleteLaptopRest = async (id) => {
+    const PARAM = `/${id}`;
+    const config = {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json"
+        },
+    }
+    const response = await fetch(URL + PARAM, config);
+    const result = await response.json();
+    
+    return result;
+}

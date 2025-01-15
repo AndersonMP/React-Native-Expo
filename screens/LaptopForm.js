@@ -1,10 +1,10 @@
 import { Button, Input } from "@rneui/base";
-import { View, StyleSheet, Alert } from "react-native"
-import { useSaveLaptop } from "../hooks/useSaveLaptop";
+import { View, StyleSheet } from "react-native"
+import { useManipulateLaptop } from "../hooks/useManipulateLaptop";
 
 export const LaptopForm = ({ navigation, route }) => {
     let laptopRetrieved = route.params?.itemParam;
-    const { marca, procesador, ram, disco, setMarca, setProcesador, setRam, setDisco, saveLaptop, updateLaptop } = useSaveLaptop(() => navigation.goBack(), laptopRetrieved);
+    const { marca, procesador, ram, disco, setMarca, setProcesador, setRam, setDisco, saveLaptop, updateLaptop } = useManipulateLaptop(() => navigation.goBack(), laptopRetrieved);
     return (
         <View style={styles.container}>
             <Input

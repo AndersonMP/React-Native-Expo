@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Alert } from "react-native";
-import { saveLaptopRest, updateLaptopRest } from "../rest_client/laptops";
+import { saveLaptopRest, updateLaptopRest, deleteLaptopRest } from "../rest_client/laptops";
 
-export const useSaveLaptop = (onSuccess, laptop = null) => {
+export const useManipulateLaptop = (onSuccess, laptop = null) => {
     const [marca, setMarca] = useState(laptop?.marca || "");
     const [procesador, setProcesador] = useState(laptop?.procesador || "");
     const [ram, setRam] = useState(laptop?.memoria || "");
@@ -41,6 +41,33 @@ export const useSaveLaptop = (onSuccess, laptop = null) => {
         }
     }
 
+    const deleteLaptop = async ({ id, marca, procesador }) => {
+        Alert.alert(
+            "Confirmación",
+            `¿Estás seguro de que deseas eliminar la laptop "${marca} ${procesador}"?`,
+            [
+                { text: "Cancelar", style: "cancel" },
+                {
+                    text: "Eliminar",
+                    onPress: async () => {
+                        try {
+                            const result = await deleteLaptopRest(id);
+                            if (result.message) {
+                                const isError = result.message.toLowerCase().includes("no encontrada");
+                                Alert.alert(isError ? "Error" : "Éxito", result.message);
+                            }
+                            if (onSuccess) onSuccess();
+                        } catch (error) {
+                            console.log(error);
+                            Alert.alert("Error", "No se pudo eliminar la laptop.");
+                        }
+                    },
+                },
+            ]
+        );
+    };
+
+
     return {
         marca,
         procesador,
@@ -51,6 +78,7 @@ export const useSaveLaptop = (onSuccess, laptop = null) => {
         setRam,
         setDisco,
         saveLaptop,
-        updateLaptop
+        updateLaptop,
+        deleteLaptop
     }
 }

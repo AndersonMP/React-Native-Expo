@@ -13,9 +13,5 @@ export const useLaptop = () => {
         }
     }, []);
 
-    useEffect(() => {
-        loadLaptops(); 
-    }, [loadLaptops]);
-
     return { data, loadLaptops };
 }
