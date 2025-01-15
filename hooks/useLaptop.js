@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { getAllLaptops } from "../rest_client/laptops";
 
 export const useLaptop = () => {
@@ -13,5 +13,9 @@ export const useLaptop = () => {
         }
     }, []);
 
-    return {data, loadLaptops};
+    useEffect(() => {
+        loadLaptops(); 
+    }, [loadLaptops]);
+
+    return { data, loadLaptops };
 }

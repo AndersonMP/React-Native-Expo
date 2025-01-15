@@ -2,8 +2,9 @@ import { Button, Input } from "@rneui/base";
 import { View, StyleSheet, Alert } from "react-native"
 import { useSaveLaptop } from "../hooks/useSaveLaptop";
 
-export const LaptopForm = ({ navigation }) => {
-    const { marca, procesador, ram, disco, setMarca, setProcesador, setRam, setDisco, saveLaptop } = useSaveLaptop(() => navigation.goBack());
+export const LaptopForm = ({ navigation, route }) => {
+    let laptopRetrieved = route.params?.itemParam;
+    const { marca, procesador, ram, disco, setMarca, setProcesador, setRam, setDisco, saveLaptop, updateLaptop } = useSaveLaptop(() => navigation.goBack(), laptopRetrieved);
     return (
         <View style={styles.container}>
             <Input
@@ -28,7 +29,7 @@ export const LaptopForm = ({ navigation }) => {
             />
             <Button
                 title="GUARDAR"
-                onPress={saveLaptop}
+                onPress={laptopRetrieved ? updateLaptop : saveLaptop}
             />
         </View>
     )

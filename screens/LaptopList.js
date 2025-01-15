@@ -3,20 +3,22 @@ import { useLaptop } from "../hooks/useLaptop";
 import { LaptopItem } from "./LaptopItem";
 import { Button, FAB } from "@rneui/base";
 
-export const LaptopList = ({navigation}) => {
+
+export const LaptopList = ({ navigation }) => {
     const { data, loadLaptops } = useLaptop();
+    
     return (
         <View style={styles.container}>
             <Text>LISTA DE LAPTOPS</Text>
             <FlatList
                 data={data}
                 keyExtractor={item => item.id.toString()}
-                renderItem={({ item }) => <LaptopItem item={item} />}
+                renderItem={({ item }) => <LaptopItem item={item} navigation={navigation} />}
             />
             <FAB
                 title="+"
                 placement="right"
-                onPress={()=> navigation.navigate('LaptopFormNav')}
+                onPress={() => navigation.navigate('LaptopFormNav', {})}
             />
             <Button
                 title="Consultar"

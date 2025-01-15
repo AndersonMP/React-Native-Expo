@@ -27,3 +27,25 @@ export const saveLaptopRest = async ({ marca, procesador, ram, disco }, fnShowMe
     fnShowMessage();
     return result;
 }
+
+export const updateLaptopRest = async ({ id, marca, procesador, ram, disco }, fnShowMessage) => {
+    const PARAM = `/${id}`;
+    const config = {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            id: id,
+            marca: marca,
+            procesador: procesador,
+            memoria: ram,
+            disco: disco
+        })
+    };
+    const response = await fetch(URL + PARAM, config);
+    const result = await response.json();
+    fnShowMessage();
+
+    return result;
+}
